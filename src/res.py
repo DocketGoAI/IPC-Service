@@ -3,7 +3,11 @@ import json
 
 
 class Fetcher():
+    """
+    The fetcher class implements a method to fetch data from the json file.
+    It is as simple as that.
 
+    """
     
 
 
@@ -17,7 +21,7 @@ class Fetcher():
 
             self.data = json.load(f)
 
-    def ret_id(self, section, *args, **kwargs):
+    def ret_id(self, section:str, *args, **kwargs) -> dict:
         return self.data[section]
                 
     

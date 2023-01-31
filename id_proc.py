@@ -1,4 +1,8 @@
 import json
+"""
+The script is to make the json dict like, so that we can call with the id
+Generates ip_id.json
+"""
 
 # Single time running python file
 data  = json.load(open('ipc.json', 'r', ))
