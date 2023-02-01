@@ -17,11 +17,27 @@ class Fetcher():
         self.load_data()
 
     def load_data(self):
-        with open('ipc.json', 'r') as f:
+        with open('ipc_id.json', 'r') as f:
 
             self.data = json.load(f)
 
-    def ret_id(self, section:str, *args, **kwargs) -> dict:
-        return self.data[section]
-                
+    def ret_all(self):
+        return self.data
+
+    
+    def ret_id_exact(self,section:str, *args, **kwargs):
+
+        for i in self.data.keys():
+            if str(self.data[i]['Section']) == section:
+                return self.data[i]
+
+        return {'error': 'No such section found'},422
+
+    def ret_id(self, section:str, *args, **kwargs):
+        # Fetch the Section for exact JSON
+        for i in self.data.keys():
+            if str(self.data[i]['Section']) == section:
+                return self.data[i]
+
+        return {'error': 'No such section found'},422
     
