@@ -1,6 +1,5 @@
 import json
-
-
+from .optimize_search import OptimizeSearch
 
 class Fetcher():
     """
@@ -8,13 +7,12 @@ class Fetcher():
     It is as simple as that.
 
     """
-    
-
 
     def __init__(self)-> None:
-
         self.data = None
         self.load_data()
+        #class for optimized section search
+        self.optimal=OptimizeSearch(self.data)
 
     def load_data(self):
         with open('ipc_id.json', 'r') as f:
@@ -34,10 +32,10 @@ class Fetcher():
         return {'error': 'No such section found'},422
 
     def ret_id(self, section:str, *args, **kwargs):
-        # Fetch the Section for exact JSON
-        for i in self.data.keys():
-            if str(self.data[i]['Section']) == section:
-                return self.data[i]
+        # searching section in json data
+        result=self.optimal.search(section)
+        if(result!=None):
+           return self.data[(result.key["key"])]
 
         return {'error': 'No such section found'},422
     
