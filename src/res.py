@@ -39,3 +39,24 @@ class Fetcher():
 
         return {'error': 'No such section found'},422
     
+    def ret_keyword_section(self,keyword:str,*args,**kwargs):
+        #searching for section using keywords
+        keyword=self.optimal.search(keyword)
+        keyword_lower=keyword.lower()
+
+        for i in self.data.keys():
+            sec_title_lower=self.data[i]['section_title'].lower()
+
+            section_desc_lower= self.data[i]['section_desc'].lower()
+           
+            if keyword_lower in sec_title_lower or keyword_lower in section_desc_lower:
+                
+                return self.data[i]['Section']
+            
+            return {'error' : 'No matching sections found'},422
+        
+
+        
+        
+
+    
